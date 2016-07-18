@@ -1,0 +1,81 @@
+<link rel="import" href="/bower_components/app-storage/app-network-status-behavior.html">
+<script>
+    'use strict';
+
+    window.Plutonium = window.Plutonium || {};
+
+    Plutonium.CrudBehaviorImpl = {
+        properties: {
+            editedId: {
+                type: String,
+                notify: true
+            },
+            path: {
+                type: String,
+                notify: true,
+                value: ''
+            }
+        },
+        isEditable: function () {
+            return true;
+        },
+        toEditableId: function (id) {
+            return id;
+        },
+        edit: function (event) {
+            if (this.isEditable) {
+                var element = Polymer.dom(event).localTarget;
+                this.editedId = this.toEditableId(element.id);
+                this.$.document.transactionsComplete.then(function () {
+                    this.$.editor.open(element);
+                });
+            }
+        },
+        create: function () {
+            if (this.isEditable) {
+                this.editedId = null;
+                this.$.editor.open();
+            }
+        },
+        commitChange: function (event) {
+            var changeCommits;
+            switch (event.detail) {
+                case 'save':
+                    changeCommits = this.save();
+                    break;
+                case 'delete':
+                    changeCommits = this.delete();
+                    break;
+                default:
+                    changeCommits = Promise.resolve();
+                    break;
+            }
+
+            if (this.$.query && this.$.query.refresh) {
+                changeCommits.then(function () {
+                    this.$.query.refresh();
+                });
+            }
+        },
+        save: function () {
+            if (this.$.document.isNew && this.editableItem) {
+                return this.$.document.save(this.path).then(function () {
+                    this.$.document.reset();
+                });
+            }
+
+            return Promise.resolve();
+        },
+        delete: function () {
+            if (!this.$.document.isNew) {
+                this.$.document.destroy();
+            }
+
+            return Promise.resolve();
+        }
+    };
+
+    Plutonium.CrudBehavior = [
+        Plutonium.CrudBehaviorImpl
+    ];
+</script>

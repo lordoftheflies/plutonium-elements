@@ -1,0 +1,28 @@
+<link rel="import" href="/bower_components/app-storage/app-network-status-behavior.html">
+<script>
+    'use strict';
+    
+    window.Plutonium = window.Plutonium || {};
+    
+    Plutonium.AppBehaviorImpl = {
+        properties: {
+            user: {
+                type: Object,
+                notify: true
+            }
+        },
+        signIn: function () {
+            this.$.auth.signInWithPopup();
+        },
+        signOut: function () {
+            if (this.$.auth) {
+                this.$.auth.signOut();
+            }
+        }
+    };
+    
+    Plutonium.AppBehavior = [
+        Polymer.AppNetworkStatusBehavior,
+        Plutonium.AppBehaviorImpl
+    ];
+</script>
