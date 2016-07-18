@@ -9,6 +9,8 @@
         <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
         <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
 
+        <link rel="import" href="../../polymerfire/firebase-app.html">
+
         <link rel="import" href="../plutonium-elements.html">
 
         <style is="custom-style" include="demo-pages-shared-styles">
@@ -16,33 +18,32 @@
     </head>
     <body>
 
-        <div class="vertical-section-container centered">
-            <h3>Basic plutonium-elements Demo</h3>
-            <demo-snippet>
-                <template>
-                    <style include="plutonium-shared-styles"></style>
+    <firebase-app
+        name="notes"
+        api-key="AIzaSyDNUiCsu9v9-EaJ177gZF7jXak15t5qv_c"
+        auth-domain="plutonium-app.firebaseapp.com"
+        database-url="https://plutonium-app.firebaseio.com">
+    </firebase-app>
 
-                    <firebase-auth
-                        id="auth"
-                        app-name="notes"
-                        provider="google"
-                        signed-in="{{signedIn}}"
-                        user="{{user}}">
-                    </firebase-auth>
 
-                    <na-toolbar
-                        signed-in="[[signedIn]]"
-                        on-sign-out="signOut">
-                    </na-toolbar>
-                    <na-login
-                        on-sign-in="signIn"
-                        signed-in="[[signedIn]]"
-                        disabled="[[!online]]">
+    <div class="vertical-section-container centered">
+        <h3>Basic plutonium-elements Demo</h3>
+        <demo-snippet>
+            <template>
+                <style include="plutonium-shared-styles"></style>
 
-                    </na-login>
-                    <div class="notes">
-                        Application home page.
-                    </div>
+                <firebase-auth id="auth" app-name="notes" provider="google" signed-in="{{signedIn}}" user="{{user}}">
+                </firebase-auth>
+
+                <plutonium-toolbar signed-in="[[signedIn]]" on-sign-out="signOut">
+                </plutonium-toolbar>
+
+                <plutonium-login on-sign-in="signIn" signed-in="[[signedIn]]" disabled="[[!online]]">
+                </plutonium-login>
+
+                <div class="notes">
+                    Application home page.
+                </div>
             </template>
         </demo-snippet>
     </div>
