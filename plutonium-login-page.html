@@ -48,23 +48,46 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         /**
          * `<plutonium-login>` is a login screen with the choosable login methods.
          *
-         * In typical use, just route to the anonymous users.
+         * In typical use, just route to the anonymous users with `<plutonium-login>`:
+         * 
+         *     <body>
+         *       <plutonium-login></plutonium-login>
+         *     </body>
+         * 
+         *  @hero path/to/image
+         *  @demo demo/index.html  Secure application demo!
+         *  @demo demo/index.html  CRUD operations on firebase demo!
          */
 
         Polymer({
             is: 'plutonium-login',
             properties: {
+                /**
+                 * Enable/disable flag
+                 */
                 disabled: {
                     type: Boolean,
                     reflectToAttribute: true,
                     value: false
                 },
+                /**
+                 * Signed-in indicator.
+                 */
                 signedIn: {
                     type: Boolean,
                     reflectToAttribute: true,
                     value: false
                 }
             },
+            /**
+             * Fired when user log in.
+             *
+             * @event sign-in
+             */
+            
+            /**
+             * Start sign-in..
+             */
             signIn: function () {
                 this.fire('sign-in', null, {
                     bubbles: false
