@@ -33,6 +33,22 @@
             user: {
                 type: Object,
                 notify: true
+            },
+            /**
+             * Enable/disable flag
+             */
+            disabled: {
+                type: Boolean,
+                reflectToAttribute: true,
+                value: false
+            },
+            /**
+             * Signed-in indicator.
+             */
+            signedIn: {
+                type: Boolean,
+                reflectToAttribute: true,
+                value: false
             }
         },
         signIn: function () {

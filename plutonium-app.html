@@ -101,23 +101,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 Plutonium.CrudBehavior
             ],
             properties: {
-                /**
-                 * Enable/disable flag
-                 */
-                disabled: {
-                    type: Boolean,
+                page: {
+                    type: String,
                     reflectToAttribute: true,
-                    value: false
-                },
-                /**
-                 * Signed-in indicator.
-                 */
-                signedIn: {
-                    type: Boolean,
-                    reflectToAttribute: true,
-                    value: false
+                    observer: '_pageChanged'
                 }
             },
+            observers: [
+                '_routePageChanged(routeData.page)'
+            ],
+            _routePageChanged: function (page) {
+                this.page = page || 'view1';
+            },
+            _pageChanged: function (page) {
+                // load page import on demand.
+                this.importHref(
+                        this.resolveUrl('my-' + page + '.html'), null, null, true);
+            }
             /**
              * Fired when user log in.
              *
