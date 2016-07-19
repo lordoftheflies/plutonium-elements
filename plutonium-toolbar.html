@@ -56,7 +56,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </style>
         <iron-icon icon="bookmark"></iron-icon>
 
-        <h1>[[applicationName]]</h1>
+        <h1>[[appName]]</h1>
 
         <paper-menu-button 
             id="avatarMenu"
@@ -90,15 +90,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         /**
          * `<plutonium-toolbar>` is a component for main application header.
          *
+         * @hero path/to/image
+         * 
          * In typical use, just slap some `<plutonium-toolbar>` at the top of your body header:
          *
          *     <body>
          *       <plutonium-toolbar></plutonium-toolbar>
          *     </body>
          * 
-         *  @hero path/to/image
-         *  @demo demo/index.html  Secure application demo!
-         *  @demo demo/index.html  CRUD operations on firebase demo!
+         * @demo demo/app.html  Secure application demo!   
+         *
+         *     <body>
+         *       <plutonium-toolbar></plutonium-toolbar>
+         *     </body>
+         * 
+         * @demo demo/app.html  CRUD operations on firebase demo!
          */
         Polymer({
             is: 'plutonium-toolbar',
@@ -122,8 +128,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 /**
                  * Application name.
                  */
-                applicationName: {
-                    type: String
+                appName: {
+                    type: String,
+                    notify: true
                 },
                 /**
                  * User object.
