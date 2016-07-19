@@ -95,16 +95,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          * In typical use, just slap some `<plutonium-toolbar>` at the top of your body header:
          *
          *     <body>
-         *       <plutonium-toolbar></plutonium-toolbar>
+         *       <plutonium-toolbar user="[[user]]" app-name="Test title" signed-in="[[signedIn]]" on-sign-out="signOut"></plutonium-toolbar>
          *     </body>
          * 
-         * @demo demo/app.html  Secure application demo!   
-         *
-         *     <body>
-         *       <plutonium-toolbar></plutonium-toolbar>
-         *     </body>
-         * 
-         * @demo demo/app.html  CRUD operations on firebase demo!
+         * @demo demo/index-toolbar.html  Sample toolbar demo!   
          */
         Polymer({
             is: 'plutonium-toolbar',

@@ -12,7 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<dom-module id="plutonium-login">
+<dom-module id="plutonium-login-page">
     <template>
         <style>
             :host {
@@ -47,21 +47,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </template>
     <script>
         /**
-         * `<plutonium-login>` is a login screen with the choosable login methods.
+         * `<plutonium-login-page>` is a login screen with the choosable login methods.
          *
-         * In typical use, just route to the anonymous users with `<plutonium-login>`:
+         * In typical use, just route to the anonymous users with `<plutonium-login-page>`:
          * 
          *     <body>
-         *       <plutonium-login></plutonium-login>
+         *       <plutonium-login-page></plutonium-login-page>
          *     </body>
          * 
          *  @hero path/to/image
-         *  @demo demo/index.html  Secure application demo!
-         *  @demo demo/index.html  CRUD operations on firebase demo!
+         *  @demo demo/index-login.html  Splash screen demo!
          */
 
         Polymer({
-            is: 'plutonium-login',
+            is: 'plutonium-login-page',
             properties: {
                 /**
                  * Enable/disable flag
