@@ -12,9 +12,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../app-storage/app-network-status-behavior.html">
+<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="../paper-badge/paper-badge.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-item/paper-icon-item.html">
+<link rel="import" href="../paper-menu/paper-menu.html">
+<link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="plutonium-shared-styles.html">
 <dom-module id="plutonium-toolbar">
     <template>
-        <style>
+        <style include="plutonium-shared-styles">
             :host {
                 @apply(--layout-horizontal);
                 @apply(--layout-center);
@@ -48,14 +55,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
         </style>
         <iron-icon icon="bookmark"></iron-icon>
-        <h1>Notes</h1>
-        <iron-icon icon="cloud" hidden$="[[!online]]"></iron-icon>
-        <iron-icon icon="cloud-off" hidden$="[[online]]"></iron-icon>
-        <paper-icon-button
-            icon="[[computeLockIcon(signedIn)]]"
-            disabled="[[!signedIn]]"
-            on-tap="lock">
-        </paper-icon-button>
+
+        <h1>[[applicationName]]</h1>
+
+        <paper-menu-button 
+            id="avatarMenu"
+            vertical-align="top"
+            horizontal-align="right">
+            <iron-image id="avatar" class="avatar-circle dropdown-trigger" sizing="cover" src="[[user.photoURL]]"></iron-image>
+
+            <paper-menu class="dropdown-content" selectable="paper-item">
+                <plutonium-session-info
+                    user="[[user]]">
+                </plutonium-session-info>
+                <paper-item class="session-action">Share</paper-item>
+                <paper-item class="session-action">Settings</paper-item>
+                <paper-item class="session-action">Help</paper-item>
+                <paper-icon-item 
+                    class="session-action"
+                    on-tap="lock">
+                    <iron-icon 
+                        icon="[[computeLockIcon(signedIn)]]"
+                        disabled="[[!signedIn]]"
+                        item-icon></iron-icon>
+                    <label>Logout</label>
+                </paper-icon-item>
+            </paper-menu>
+        </paper-menu-button>
+
+        <paper-badge icon="[[computeOnlineIcon(online)]]" for="avatar" label="online" class="blue">
+        </paper-badge>
     </template>
     <script>
         /**
@@ -91,6 +120,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     value: false
                 },
                 /**
+                 * Application name.
+                 */
+                applicationName: {
+                    type: String
+                },
+                /**
                  * User object.
                  */
                 user: {
@@ -98,13 +133,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     notify: true
                 }
             },
-            
             /**
              * Fired when user log out.
              *
              * @event sign-out
              */
-            
+
             /**
              * Compute lock icon.
              *
@@ -115,9 +149,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 return signedIn ? 'lock-open' : 'lock';
             },
             /**
+             * Compute online icon.
+             *
+             * @param {boolean} Sign-in/out indicator.
+             * @return {string} Icon name.
+             */
+            computeOnlineIcon: function (online) {
+                return online ? 'cloud' : 'cloud-off';
+            },
+            /**
              * Fire logout event.
              */
             lock: function () {
+                this.$.avatarMenu.close();
                 this.fire('sign-out');
             }
         });
