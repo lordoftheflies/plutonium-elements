@@ -37,12 +37,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-drawer-layout>
 
             <app-drawer>
-                <paper-menu selected="{{page}}">
-                    <paper-item>Home</paper-item>
-                    <paper-item>About</paper-item>
-                    <paper-item>Schedule</paper-item>
-                    <paper-item>Account</paper-item>
-                </paper-menu>
+                <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+                    <content select=".menu"></content>
+                </iron-selector>
             </app-drawer>
 
             <app-header-layout>
@@ -58,7 +55,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         </plutonium-toolbar>
                     </app-toolbar>
                 </app-header>
-                <iron-pages selected="{{page}}">
+
+                <iron-pages role="main" selected="[[page]]" attr-for-selected="name">
+                    <content select=".page"></content>
                     <sample-content size="100"></sample-content>
                     <sample-content size="100"></sample-content>
                     <sample-content size="100"></sample-content>
