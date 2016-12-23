@@ -30,7 +30,13 @@
     "paper-radio-group": "polymerelements/paper-radio-group#^1.2.0",
     "paper-radio-button": "polymerelements/paper-radio-button#^1.2.1",
     "paper-listbox": "polymerelements/paper-listbox#^1.1.2",
-    "plutonium-manageable-content": "lordoftheflies/plutonium-manageable-content#^0.0.2"
+    "plutonium-application-button": "lordoftheflies/plutonium-application-button#^1.0.3",
+    "plutonium-avatar-button": "lordoftheflies/plutonium-avatar-button#^0.1.6",
+    "plutonium-calendar-widget": "lordoftheflies/plutonium-calendar-widget",
+    "plutonium-chart-widget": "lordoftheflies/plutonium-chart-widget",
+    "plutonium-icon-input": "lordoftheflies/plutonium-icon-input#^1.0.0",
+    "seed-element": "lordoftheflies/plutonium-location-input",
+    "plutonium-language-picker": "lordoftheflies/plutonium-language-picker#^1.0.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
